@@ -17,7 +17,7 @@ class House():
                     x = col_ind * 32
                     y = row_ind * 32
                     if type == 'dungeon_timber_brace_3':
-                        dungeon_timber_brace_3_tile_list = import_cut_graphics('D:/Python project/Pygame project/Platformer images/objects/dungeon_timber_brace_3.png', 83, 17)
+                        dungeon_timber_brace_3_tile_list = import_cut_graphics('../../Platformer images/objects/dungeon_timber_brace_3.png', 83, 17)
                         dungeon_timber_brace_3_surface = dungeon_timber_brace_3_tile_list[int(val)]
                         sprite = StaticTile(83, 17, x, y, dungeon_timber_brace_3_surface)
                         sprite_group.add(sprite)

@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
              self.on_ground  = False
              self.jump()
     def all_import(self):
-        heroe_path = 'D:/Python Project/Pygame project/Platformer images/main_heroe/'
+        heroe_path = '../../Platformer images/main_heroe/'
         self.animations = {'idle':[], 'run':[], 'jump':[], 'fall':[]}
         for animation in self.animations.keys():
             full_path = heroe_path + animation

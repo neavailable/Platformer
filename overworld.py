@@ -9,7 +9,7 @@ class Node(pygame.sprite.Sprite):
             self.image = pygame.image.load(path)
         else:
             self.status = 'ne_available'
-            self.image = pygame.image.load('D:\Python Project\Pygame project\Platformer images\other/lock.jpg')
+            self.image = pygame.image.load('../../Platformer images/other/lock.jpg')
         self.rect = self.image.get_rect(center = pos)
     def animation(self):
         self.index += 0.1
@@ -23,7 +23,7 @@ class Node(pygame.sprite.Sprite):
 class Rect(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
-        self.image = pygame.image.load('D:\Python Project\Pygame project\Platformer images\other/frame.jpg').convert()
+        self.image = pygame.image.load('../../Platformer images/other/frame.jpg').convert()
         self.rect = self.image.get_rect(center = pos)
 
 class Overworld():

@@ -65,28 +65,28 @@ class Level:
             for col_ind, val in enumerate(row):
                 if val != '-1':
                     x = col_ind * 32
-                    y = row_ind * 32 + 100
+                    y = row_ind * 32 + 100 #../../Platformer images/enemies/goblin/run
                     if type == 'terrain':
-                        terrain_tile_list = import_cut_graphics('D:/Python project/Pygame project/Platformer images/cut_tilesets/all_cut_tilesets.png', 32, 32)
+                        terrain_tile_list = import_cut_graphics('../../Platformer images/cut_tilesets/all_cut_tilesets.png', 32, 32)
                         tile_surface = terrain_tile_list[int(val)]
                         sprite = StaticTile(32, 32, x, y, tile_surface)
                     if type == 'enemies':
                         y1 = row_ind * 32 + 76
-                        sprite = Enemies(32, 32, x, y1, 'D:\Python project\Pygame project\Platformer images\enemies\goblin/run')
+                        sprite = Enemies(32, 32, x, y1, '../../Platformer images/enemies/goblin/run')
                     if type == 'sharps':
-                        terrain_tile_list = import_cut_graphics('D:/Python project/Pygame project/Platformer images/cut_tilesets/all_cut_tilesets.png', 32, 32)
+                        terrain_tile_list = import_cut_graphics('../../Platformer images/cut_tilesets/all_cut_tilesets.png', 32, 32)
                         tile_surface = terrain_tile_list[int(val)]
                         sprite = StaticTile(32, 32, x, y, tile_surface)
                     if type == 'boxes':
-                        sprite = SingleStaticTile(32, 32, x - 20, y - 6, 'D:\Python project\Pygame project\Platformer images\objects/chest1.png')
+                        sprite = SingleStaticTile(32, 32, x - 20, y - 6, '../../Platformer images/objects/chest1.png')
                     if type == 'houses':
-                        houses_tile_list = import_cut_graphics('D:/Python project/Pygame project/Platformer images/objects/house_1.png', 251, 135)
+                        houses_tile_list = import_cut_graphics('../../Platformer images/objects/house_1.png', 251, 135)
                         houses_surface = houses_tile_list[int(val)]
                         sprite = StaticTile(251, 135, x, y - 103, houses_surface)
                     if type == 'door':
                         x1 = col_ind * 32
                         y1 = row_ind * 32 + 100
-                        door_tile_list = import_cut_graphics('D:/Python project/Pygame project/Platformer images/objects/box_1/door.png', 32, 32)
+                        door_tile_list = import_cut_graphics('../../Platformer images/objects/box_1/door.png', 32, 32)
                         door_surface = door_tile_list[int(val)]
                         sprite = StaticTile(5, 5, x1, y1, door_surface)
                     if type == 'gavno':
@@ -103,7 +103,7 @@ class Level:
                     self.player.add(sprite)
                 if val == '1':
                     y11 = y - 59
-                    tile_surf = pygame.image.load('D:\Python Project\Pygame project\Platformer images/portal/portal.png').convert_alpha()
+                    tile_surf = pygame.image.load('../../Platformer images/portal/portal.png').convert_alpha()
                     sprite = StaticTile(130, x, y11, tile_surf)
                     self.end_group.add(sprite)
     def width_touch(self):
