@@ -9,6 +9,8 @@ public class Camera_movement : MonoBehaviour
 {
     private float speed;
     [SerializeField] private float y_border;
+    [SerializeField] private float x_left_border;
+    [SerializeField] private float x_right_border;
 
     [SerializeField] private Transform target;
     // in constructor we set value of standard variables
@@ -22,7 +24,7 @@ public class Camera_movement : MonoBehaviour
 
     private void move()
     {
-        if (target.position.x < 0 || target.position.x > 3) return;
+        if (target.position.x < x_left_border || target.position.x > x_right_border) return;
 
         Vector3 new_position = new Vector3(target.position.x, target.position.y + y_border, -5f);
         transform.position = Vector3.Slerp(transform.position, new_position, speed);
