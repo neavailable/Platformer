@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 
 public class Player_movement : MonoBehaviour
 {
     private short direction;
     private float speed;
-    private bool facing_right;
-    private Animator animator;
+    private bool facing_right;    
 
     // in constructor we set value of standard variables
     Player_movement()
@@ -19,11 +19,8 @@ public class Player_movement : MonoBehaviour
         facing_right = true;
     }
 
-    // in Awake we set value of specailized (unity) objects
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
+    // in Start we set value of specailized (unity) objects
+    private void Start() {}
 
     private void move()
     {
@@ -47,6 +44,8 @@ public class Player_movement : MonoBehaviour
 
             direction = -1;
 
+            move();
+
             facing_right = false;
         }
 
@@ -56,23 +55,25 @@ public class Player_movement : MonoBehaviour
 
             direction = 1;
 
+            move();
+
             facing_right = true;
         }
 
         else direction = 0;
-        
     }
+    
     private void set_animation()
     {
-        if (direction == 0) animator.SetBool("is_running", false);
+        if (direction == 0) GetComponent<Animator>().SetBool("is_running", false);
         
-        else animator.SetBool("is_running", true); 
+        else GetComponent<Animator>().SetBool("is_running", true); 
     }
-    //edsadf
+
+    //there we will call methods which are updating every frame
     private void Update()
     {
         cath_keys();
-        move();
         set_animation();
     }
 };
