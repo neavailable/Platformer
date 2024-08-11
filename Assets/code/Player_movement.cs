@@ -68,7 +68,7 @@ public class Player_movement : MonoBehaviour
         
         else animator.SetBool("is_running", true); 
     }
-
+    //edsadf
     private void Update()
     {
         cath_keys();
