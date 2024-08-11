@@ -15,7 +15,7 @@ public class Player_movement : MonoBehaviour
     Player_movement()
     {
         direction = 0;
-        speed = 0.02f;
+        speed = 0.015f;
         facing_right = true;
     }
 
@@ -59,17 +59,14 @@ public class Player_movement : MonoBehaviour
             facing_right = true;
         }
 
-        else
-        {
-            direction = 0;
-
-            return;
-        }
+        else direction = 0;
+        
     }
     private void set_animation()
     {
         if (direction == 0) animator.SetBool("is_running", false);
-        else animator.SetBool("is_running", true);
+        
+        else animator.SetBool("is_running", true); 
     }
 
     private void Update()
