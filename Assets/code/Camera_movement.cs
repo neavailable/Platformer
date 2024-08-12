@@ -20,7 +20,7 @@ public class Camera_movement : Moving_item
     {
         if (target.position.x < x_left_border || target.position.x > x_right_border) return;
 
-        Vector3 new_position = new Vector3(target.position.x, target.position.y + y_border, -10f);
+        Vector3 new_position = new Vector3(target.position.x, target.position.y, -10f);
         transform.position = Vector3.Slerp(transform.position, new_position, speed);
     }
 

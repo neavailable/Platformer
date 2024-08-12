@@ -8,7 +8,7 @@ public class Player : Character
 
     private void Start() {}
 
-
+  
     private void cath_keys()
     {
         if (Keyboard.current.aKey.isPressed)
