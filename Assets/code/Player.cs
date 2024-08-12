@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    public Player() : base(0.015f, 0, true) {}
+    public Player() : base(0.03f, 0, true) {}
 
     private void Start() {}
 

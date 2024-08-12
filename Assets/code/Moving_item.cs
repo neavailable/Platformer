@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Moving_item : MonoBehaviour
 {
-    protected float speed;
+    [SerializeField] protected float speed;
 
     // in Start we set value of specailized (unity) objects
     void Start() {}
