@@ -44,6 +44,12 @@ TagManager:
   - name: sky
     uniqueID: 1995459487
     locked: 0
+  - name: mountains
+    uniqueID: 2840935987
+    locked: 0
+  - name: farest_forest
+    uniqueID: 978585927
+    locked: 0
   - name: far_forest
     uniqueID: 1622341087
     locked: 0
