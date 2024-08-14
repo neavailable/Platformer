@@ -41,6 +41,7 @@ public class Player : Character
         
         else GetComponent<Animator>().SetBool("is_running", true); 
     }
+
     private void Update()
     {
         cath_keys();
