@@ -8,7 +8,6 @@ public class Player : Character
 
     private void Start() {}
 
-  
     private void cath_keys()
     {
         if (Keyboard.current.aKey.isPressed)
@@ -36,13 +35,12 @@ public class Player : Character
         else direction = 0;
     }
 
-    public override void set_animation()
+    protected override void set_animation()
     {
         if (direction == 0) GetComponent<Animator>().SetBool("is_running", false);
         
         else GetComponent<Animator>().SetBool("is_running", true); 
     }
-
     private void Update()
     {
         cath_keys();

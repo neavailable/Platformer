@@ -29,7 +29,7 @@ public abstract class Character : Moving_item
         transform.localScale = scaler;
     }
 
-    public virtual void set_animation() {}
+    protected virtual void set_animation() {}
 
     void Update() {}
 }
