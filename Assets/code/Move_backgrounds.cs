@@ -51,7 +51,7 @@ internal class Move_backgrounds : MonoBehaviour
             background1.transform.position = new Vector3(right_border, background1.transform.position.y);
         }
     }
-
+    
     //there we will call methods which are updating every frame
     private void Update()
     {
