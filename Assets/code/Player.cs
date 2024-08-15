@@ -6,7 +6,9 @@ public class Player : Character
 {
     Rigidbody2D rb;
     public int jumpPower;
-
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    bool isGrounded;
     public Player() : base(0.015f, 0, true) {}
 
     private void Start() {}
@@ -14,6 +16,7 @@ public class Player : Character
 
     private void cath_keys()
     {
+        isGrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1.320356f, 1.78221f),CapsuleDirection2D.Vertical, 0, groundLayer);
         if (Keyboard.current.aKey.isPressed)
         {
             if (facing_right) flip();
@@ -35,7 +38,7 @@ public class Player : Character
 
             facing_right = true;
         }
-        else if(Keyboard.current.spaceKey.isPressed) 
+        else if(Keyboard.current.spaceKey.isPressed && isGrounded) 
         {
             rb = GetComponent<Rigidbody2D>();
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
@@ -53,6 +56,7 @@ public class Player : Character
 
     private void Update()
     {
+
         cath_keys();
         set_animation();
     }
