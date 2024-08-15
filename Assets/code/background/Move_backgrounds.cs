@@ -6,7 +6,8 @@ using UnityEngine.UIElements;
 
 internal class Move_backgrounds : MonoBehaviour
 {
-    [SerializeField] private GameObject player, background1, background2;
+    private GameObject player;
+    [SerializeField] private GameObject background_left, background_right;
 
     private float bottom_left_x, bottom_right_x;
     private float left_border, right_border;
@@ -21,10 +22,12 @@ internal class Move_backgrounds : MonoBehaviour
     // in Start we set value of specailized (unity) objects
     private void Start()
     {
-        size = background1.GetComponent<SpriteRenderer>().bounds.size.x;
+        player = GameObject.Find("player");
+
+        size = background_right.GetComponent<SpriteRenderer>().bounds.size.x;
     
-        bottom_right_x = background1.transform.position.x + size;
-        bottom_left_x = background1.transform.position.x - size;
+        bottom_right_x = background_right.transform.position.x + size;
+        bottom_left_x = background_right.transform.position.x - size;
     }
 
     // that is move background script. how it works?
@@ -38,8 +41,8 @@ internal class Move_backgrounds : MonoBehaviour
             right_border += size;
             left_border = right_border - size;
 
-            background2.transform.position = new Vector3(left_border, background1.transform.position.y);
-            background1.transform.position = new Vector3(right_border, background1.transform.position.y);
+            background_left.transform.position = new Vector2(left_border, background_right.transform.position.y);
+            background_right.transform.position = new Vector2(right_border, background_right.transform.position.y);
         }
 
         else if (player.transform.position.x < left_border)
@@ -47,8 +50,8 @@ internal class Move_backgrounds : MonoBehaviour
             left_border -= size;
             right_border = left_border + size;
 
-            background2.transform.position = new Vector3(left_border, background1.transform.position.y);
-            background1.transform.position = new Vector3(right_border, background1.transform.position.y);
+            background_left.transform.position = new Vector2(left_border, background_right.transform.position.y);
+            background_right.transform.position = new Vector2(right_border, background_right.transform.position.y);
         }
     }
     

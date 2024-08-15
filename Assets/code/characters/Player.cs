@@ -7,44 +7,41 @@ public class Player : Character
     public Player() : base(0.02f, 0, true) {}
 
     private void Start() {}
+    protected override void set_animation() {}
 
     private void cath_keys()
     {
         if (Keyboard.current.aKey.isPressed)
         {
-            if (facing_right) flip();
+            if (facing_right)
+            {
+                flip();
+                facing_right = false;
+            }
 
             direction = -1;
 
             move();
-
-            facing_right = false;
         }
 
         else if (Keyboard.current.dKey.isPressed)
         {
-            if (!facing_right) flip();
+            if (!facing_right)
+            {
+                flip();
+                facing_right = true;
+            }
 
             direction = 1;
 
             move();
-
-            facing_right = true;
         }
 
         else direction = 0;
     }
-
-    protected override void set_animation()
-    {
-        if (direction == 0) GetComponent<Animator>().SetBool("is_running", false);
-        
-        else GetComponent<Animator>().SetBool("is_running", true); 
-    }
-
     private void Update()
     {
         cath_keys();
-        set_animation();
+        set_basic_animation();
     }
 };

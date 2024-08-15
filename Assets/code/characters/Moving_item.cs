@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Moving_item : MonoBehaviour
 {
-    [SerializeField] protected float speed;
+    [SerializeField] private float speed;
 
     // in constructor we set value of standard variables
     public Moving_item(float speed_)
@@ -12,6 +12,11 @@ public abstract class Moving_item : MonoBehaviour
 
     // in Start we set value of specailized (unity) objects
     void Start() {}
+
+    protected float get_speed()
+    {
+        return speed;
+    }
 
     protected virtual void move() { }
 

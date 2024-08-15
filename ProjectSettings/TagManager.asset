@@ -59,6 +59,6 @@ TagManager:
   - name: tiles
     uniqueID: 2101652911
     locked: 0
-  - name: player
+  - name: characters
     uniqueID: 2868001419
     locked: 0
