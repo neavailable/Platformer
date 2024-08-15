@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class Player : Character
 {
+    Rigidbody2D rb;
+    public int jumpPower;
+
     public Player() : base(0.015f, 0, true) {}
 
     private void Start() {}
@@ -32,7 +35,12 @@ public class Player : Character
 
             facing_right = true;
         }
+        else if(Keyboard.current.spaceKey.isPressed) 
+        {
+            rb = GetComponent<Rigidbody2D>();
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
+        }
         else direction = 0;
     }
 
@@ -48,4 +56,7 @@ public class Player : Character
         cath_keys();
         set_animation();
     }
+
+    
+
 };
