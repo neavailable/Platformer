@@ -4,20 +4,11 @@ using UnityEngine;
 
 public abstract class Goblin : Enemy
 {
-    public Goblin() : base()
-    {
-    
-    }
+    public Goblin() {}
 
-    protected void Start()
-    {
-        base.Start();
-    }
+    private void Start() {}
 
     protected virtual void set_weapon() { }
 
-    protected void Update()
-    {
-        base.Update();
-    }
+    private void Update() {}
 }

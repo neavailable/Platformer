@@ -11,7 +11,7 @@ public abstract class Moving_item : MonoBehaviour
     }
 
     // in Start we set value of specailized (unity) objects
-    void Start() {}
+    private void Start() {}
 
     protected float get_speed()
     {
@@ -20,8 +20,10 @@ public abstract class Moving_item : MonoBehaviour
 
     protected virtual void move() { }
 
+    protected virtual void set_basic_animation() { }
+
     //there we will call methods which are updating every frame
-    void Update() {}
+    private void Update() {}
 }
 
 

@@ -15,9 +15,7 @@ public abstract class Character : Moving_item
 
     private void Start() {}
 
-
     protected virtual void set_animation() {}
-
 
     protected override void move()
     {
@@ -32,11 +30,17 @@ public abstract class Character : Moving_item
         scaler.x *= -1;
         transform.localScale = scaler;
     }
-    protected void set_basic_animation()
+    protected override void set_basic_animation()
     {
-        if (direction == 0) GetComponent<Animator>().SetBool("is_running", false);
+        //if (true)
+        //{
+        //    GetComponent<Animator>().SetInteger("state", 2);
+        //    return;
+        //}
 
-        else GetComponent<Animator>().SetBool("is_running", true);
+        if (direction == 0) GetComponent<Animator>().SetInteger("state", 0);
+
+        else GetComponent<Animator>().SetInteger("state", 1);
     }
 
     private void Update() {}
