@@ -32,12 +32,6 @@ public abstract class Character : Moving_item
     }
     protected override void set_basic_animation()
     {
-        //if (true)
-        //{
-        //    GetComponent<Animator>().SetInteger("state", 2);
-        //    return;
-        //}
-
         if (direction == 0) GetComponent<Animator>().SetInteger("state", 0);
 
         else GetComponent<Animator>().SetInteger("state", 1);

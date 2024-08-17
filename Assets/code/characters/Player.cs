@@ -7,8 +7,8 @@ public class Player : Character
     public Player() : base(0.025f, 0, true) {}
 
     private void Start() {}
-    protected override void set_animation() {}
 
+    protected override void set_animation() {}
     private void cath_keys()
     {
         if (Keyboard.current.aKey.isPressed)
@@ -39,6 +39,7 @@ public class Player : Character
 
         else direction = 0;
     }
+
     private void Update()
     {
         cath_keys();
