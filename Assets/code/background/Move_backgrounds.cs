@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-internal class Move_backgrounds : MonoBehaviour
+public class Move_backgrounds : MonoBehaviour
 {
     private GameObject player;
     [SerializeField] private GameObject background_left, background_right;

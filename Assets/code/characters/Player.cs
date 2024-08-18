@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 
@@ -41,10 +40,7 @@ public class Player : Character
         {
             current_state = states.is_standing;
             direction = 0;
-            return;
         }
-
-        current_state = states.is_running;
     }
 
     private void Update()
