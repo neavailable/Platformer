@@ -1,14 +1,16 @@
 using UnityEngine;
-using System.Timers;
+ 
 
 public abstract class Enemy : Character
 {
-    private bool is_standing, is_running, change_action_when_rest, change_action_when_attack, is_attacking;
+    private bool change_action_when_rest, change_action_when_attack;
     [SerializeField] private float noticed_box_width, noticed_box_height;
 
     private float start_time_of_standing, end_time_of_standing, start_time_of_attacking, end_time_of_attacking; 
 
     [SerializeField] private int left_position_border, right_position_border;
+
+    private int attacking_chance, standing_chance;
 
     private Transform transform;
     private GameObject player;
@@ -30,9 +32,11 @@ public abstract class Enemy : Character
 
     public Enemy() : base(1f, 1, true)
     {
-        is_running = false; is_standing = false; change_action_when_rest = true; change_action_when_attack = true; is_attacking = false;
+        change_action_when_rest = true; change_action_when_attack = true;
 
-        end_time_of_standing = 1f; end_time_of_attacking = 1f;
+        end_time_of_standing = 1f; end_time_of_attacking = 2f;
+
+        attacking_chance = 80; standing_chance = 20;
     }
 
     protected void Start()
@@ -43,9 +47,9 @@ public abstract class Enemy : Character
         player = GameObject.Find("player");
     }
 
-    protected override void set_animation() 
+    protected override void set_animation()
     {
-        if (is_attacking)
+        if (current_state == states.is_attacking)
         {
             GetComponent<Animator>().SetInteger("state", 2);
 
@@ -55,24 +59,25 @@ public abstract class Enemy : Character
         set_basic_animation();
     }
 
-    private void set_can_change_action(ref bool can_change_action)
+    private void set_can_change_action(states state_, ref bool can_change_action, float start_time, float end_time)
     {
-        if (is_standing && Time.time - start_time_of_standing > end_time_of_standing) can_change_action = true;
+        if (current_state == state_ && Time.time - start_time > end_time)
+        {
+            current_state = states.do_nothing;
+
+            can_change_action = true;
+        }
     }
 
     private void stand(int shortest_end_time, int longest_end_time)
     {
-        goal = transform.position;
-
         end_time_of_standing = new System.Random().Next(shortest_end_time, longest_end_time);
 
         start_time_of_standing = Time.time;
 
         direction = 0;
 
-        is_standing = true;
-
-        is_running = false;
+        current_state = states.is_standing;
     }
 
     private void set_pos_as_goal(float x, float y)
@@ -81,28 +86,36 @@ public abstract class Enemy : Character
 
         start_time_of_standing = -1f;
 
-        is_standing = false; is_running = true;
+        current_state = states.is_running;
     }
 
-    private void choose_stand_or_walk(ref bool can_change_action, int stand_probability, int shortest_end_time, int longest_end_time, float goal_x)
+    private void generate_action(ref bool can_change_action, int stand_probability, int run_probaility, int shortest_end_time, int longest_end_time, float goal_x)
     {
-        set_can_change_action(ref can_change_action);
-
         if (can_change_action)
         {
             int probability = new System.Random().Next(0, 101);
 
-            if (probability >= 0 && probability <= stand_probability) stand(shortest_end_time, longest_end_time);
+            if (probability >= 0 && probability <= stand_probability) { Debug.Log(1); stand(shortest_end_time, longest_end_time); }
 
-            else set_pos_as_goal(goal_x, transform.position.y);
+            else if (probability > stand_probability && probability <= stand_probability + run_probaility)
+            {
+                Debug.Log(2); set_pos_as_goal(goal_x, transform.position.y);
+            }
 
+            else
+            {
+                Debug.Log(3);
+                attack();
+            }
             can_change_action = false;
         }
     }
 
     private void do_at_resting_state()
     {
-        choose_stand_or_walk(ref change_action_when_rest, 30, 1, 3, new System.Random().Next(left_position_border, right_position_border) );
+        set_can_change_action(states.is_standing, ref change_action_when_rest, start_time_of_standing, end_time_of_standing);
+
+        generate_action(ref change_action_when_rest, 40, 60, 1, 3, new System.Random().Next(left_position_border, right_position_border) );
         change_action_when_attack = true;
     }
 
@@ -119,53 +132,28 @@ public abstract class Enemy : Character
     {
         start_time_of_attacking = Time.time;
 
-        is_standing = false; is_running = false; change_action_when_rest = true; change_action_when_attack = true; is_attacking = true;
+        current_state = states.is_attacking; change_action_when_rest = true; change_action_when_attack = true; 
         direction = 0;
     }
 
     private void do_in_attack_mode()
     {
-        if ( is_in_box(player.transform.position, 1.5f, 0.5f) )
+        if ( is_in_box(player.transform.position, 1.5f, 0.7f) )
         {
-            if (is_attacking && Time.time - start_time_of_attacking > end_time_of_attacking)
-            {
-                Debug.Log(111);
-                is_attacking = false;
-                is_standing = false;
-                change_action_when_attack = true;
-            }
-            else if (is_attacking && Time.time - start_time_of_attacking <= end_time_of_attacking)
-            {
-                attack();
-                return;
-            }
+            set_can_change_action(states.is_standing,  ref change_action_when_attack, start_time_of_standing,  end_time_of_standing);
+            set_can_change_action(states.is_attacking, ref change_action_when_attack, start_time_of_attacking, end_time_of_attacking);
 
-            if (is_standing && Time.time - start_time_of_standing > end_time_of_standing)
-            {
-                is_attacking = false;
-                is_standing = true;
-                change_action_when_attack = false;
-            }
-
-
-            if (change_action_when_attack)
-            {
-                int probability = new System.Random().Next(0, 101);
-
-                if (probability >= 0 && probability <= 50) stand(1, 3);
-
-                else attack();
-
-                change_action_when_attack = false;
-            }
+            generate_action(ref change_action_when_attack, 20, 0, 1, 2, player.transform.position.x);
         }
         // шоб єбашив 2 рази під ряд
 
         else
         {
-            choose_stand_or_walk(ref change_action_when_attack, 20, 1, 3, player.transform.position.x);
-            change_action_when_rest = true;
+            set_can_change_action(states.is_standing, ref change_action_when_attack, start_time_of_standing, end_time_of_standing);
+            generate_action(ref change_action_when_attack, 20, 80, 1, 3, player.transform.position.x);
         }
+
+        change_action_when_rest = true;
 
         goal = player.transform.position;
     }
@@ -183,11 +171,6 @@ public abstract class Enemy : Character
         {
             direction = -1;
             facing_right = false;
-        }
-        else if (goal.x == transform.position.x)
-        {
-            direction = 0;
-            return;
         }
         else
         { 
@@ -208,17 +191,13 @@ public abstract class Enemy : Character
 
     protected void Update()
     {
-        is_attacking = false;
-
-        if ( has_player_noticed() )
-        {
-            do_in_attack_mode();
-        }
+        if ( has_player_noticed() ) do_in_attack_mode();
+        
         else do_at_resting_state();
 
-        if (is_running && !is_attacking) move_to();
+        if (current_state == states.is_running) move_to();
 
-        if (is_attacking) Debug.Log(1);
         set_animation();
     }
 }
+

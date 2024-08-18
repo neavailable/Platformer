@@ -37,7 +37,14 @@ public class Player : Character
             move();
         }
 
-        else direction = 0;
+        else
+        {
+            current_state = states.is_standing;
+            direction = 0;
+            return;
+        }
+
+        current_state = states.is_running;
     }
 
     private void Update()

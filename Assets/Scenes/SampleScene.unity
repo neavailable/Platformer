@@ -629,7 +629,7 @@ SpriteRenderer:
   m_Size: {x: 14.16, y: 6.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &407371463
@@ -2551,7 +2551,7 @@ SpriteRenderer:
   m_Size: {x: 14.16, y: 6.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &667154506
@@ -2635,7 +2635,7 @@ SpriteRenderer:
   m_Size: {x: 14.16, y: 6.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &715936787
@@ -2719,7 +2719,7 @@ SpriteRenderer:
   m_Size: {x: 14.16, y: 6.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &721191635
@@ -3001,7 +3001,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03939426, y: -0.035481274}
+  m_Offset: {x: -0.26039827, y: -0.035481274}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3012,7 +3012,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.666084, y: 1.3839298}
+  m_Size: {x: 1.224076, y: 1.3839298}
   m_EdgeRadius: 0
 --- !u!50 &961460862
 Rigidbody2D:
@@ -3130,7 +3130,7 @@ MonoBehaviour:
   noticed_box_width: 10
   noticed_box_height: 0.5
   left_position_border: -20
-  right_position_border: 20
+  right_position_border: 0
 --- !u!1 &1044583949
 GameObject:
   m_ObjectHideFlags: 0

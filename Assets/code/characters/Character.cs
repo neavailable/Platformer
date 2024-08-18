@@ -3,12 +3,17 @@ using UnityEngine;
 
 public abstract class Character : Moving_item
 {
+    protected enum states { do_nothing, is_standing, is_running, is_attacking };
+    protected states current_state;
+
     protected int direction;
     protected bool facing_right;
 
     public Character(float speed_, int direction_, bool facing_right_) 
         : base(speed_)
     {
+        current_state = states.do_nothing;
+
         direction = direction_;
         facing_right = facing_right_;
     }
@@ -32,7 +37,7 @@ public abstract class Character : Moving_item
     }
     protected override void set_basic_animation()
     {
-        if (direction == 0) GetComponent<Animator>().SetInteger("state", 0);
+        if (current_state == states.is_standing) GetComponent<Animator>().SetInteger("state", 0);
 
         else GetComponent<Animator>().SetInteger("state", 1);
     }
